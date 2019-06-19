@@ -32,10 +32,11 @@ To get started:
       .where(votes:{type: 'UpVote', user_id: 10})
       .count('distinct posts.id')
     with join_select, we can do
-    User.with(groups:{ posts: { comments: {votes: {type: 'UpVote', user_id: 10}}}})
+    User.with(groups:{ posts: { comments: {votes: {type: 'UpVote', user_id: 10}}}}).select('distinct posts.id')
 
     
  Todo
  
 Handle polymorphic relations
+
 tests
