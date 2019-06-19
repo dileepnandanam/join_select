@@ -25,14 +25,14 @@ To get started:
 
     suppose we need to get count of posts under a users group with comments upvoted by user#id 10
     in general it will be
-    User.joins(:groups)
+    current_user.groups
       .joins('inner join posts on posts.group_id = groups.id')
       .joins('inner join comments on comments.post_id = posts.id')
       .joins('inner join votes on votes.comment_id = comments.id')
       .where(votes:{type: 'UpVote', user_id: 10})
       .count('distinct posts.id')
     with join_select, we can do
-    User.with(groups:{ posts: { comments: {votes: {type: 'UpVote', user_id: 10}}}}).select('distinct posts.id')
+    User.with(id: current_user.id, groups:{ posts: { comments: {votes: {type: 'UpVote', user_id: 10}}}}).select('distinct posts.id')
 
     
  Todo
